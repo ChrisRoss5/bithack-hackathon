@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .absolute-center {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .separator {
+    @apply h-1 w-full;
+  }
+}
+
+html {
+  background-image: url(/pictures/html-bg.webp);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: oklch(var(--b3)) !important;
+  background-blend-mode: overlay;
+}
+
+* {
+  transition: background-color 0.2s;
+}
