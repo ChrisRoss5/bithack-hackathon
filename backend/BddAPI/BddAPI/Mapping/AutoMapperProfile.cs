@@ -13,8 +13,5 @@ public class AutoMapperProfile : Profile
 
         CreateMap<CommunityHome, CommunityHomeRequestDto>();
         CreateMap<CommunityHomeRequestDto, CommunityHome>();
-
-        CreateMap<Reservation, ReservationRequestDto>();
-        CreateMap<ReservationRequestDto, Reservation>();
     }
 }

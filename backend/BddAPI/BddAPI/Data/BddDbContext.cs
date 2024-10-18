@@ -1,4 +1,3 @@
-using System;
 using BddAPI.Enum;
 using BddAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -8,14 +7,14 @@ namespace BddAPI.Data;
 public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; init; }
-    public DbSet<CommunityHome> CommunityCenters { get; init; }
-    public DbSet<Reservation> Reservations { get; init; }
-    public DbSet<Role> Roles { get; init; }
     public DbSet<UserRole> UserRoles { get; init; }
+    public DbSet<Role> Roles { get; init; }
     public DbSet<RefreshToken> RefreshTokens { get; init; }
-    public DbSet<ContractDocument> ContractDocuments { get; init; }
-    public DbSet<RequestDocument> RequestDocuments { get; init; }
-    public DbSet<RecordDocument> RecordDocuments { get; init; }
+    public DbSet<CommunityHome> CommunityHomes { get; init; }
+    public DbSet<ContractRangeModel> ContractRangeModels { get; init; }
+    public DbSet<Contract> Contracts { get; init; }
+    public DbSet<Record> Records { get; init; }
+    public DbSet<RangeModel> RangeModels { get; init; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -48,7 +47,7 @@ public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(op
             },
             new Role
             {
-                Id = Guid.Parse("de19b1a7-8dc3-49e2-b98f-9990a9f59118"),
+                Id = Guid.Parse("24c3a698-34be-4fb7-86c1-e99c380619ae"),
                 Name = RoleType.CityOfficial.ToString(),
                 Description = "Regular user role with limited access"
             }

@@ -1,6 +1,9 @@
 using System.Text;
+using BddAPI.Data;
 using BddAPI.Enum;
+using BddAPI.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -70,6 +73,12 @@ builder.Services.AddAuthorizationBuilder()
     .AddPolicy("Janitor", policy => policy.RequireRole(RoleType.Janitor.ToString()))
     .AddPolicy("User", policy => policy.RequireRole(RoleType.User.ToString()))
     .AddPolicy("CityOfficial", policy => policy.RequireRole(RoleType.CityOfficial.ToString()));
+
+builder.Services.AddDbContext<BddDbContext>(options =>
+{
+    options.UseSqlServer("name=ConnectionStrings:DefaultConnection");
+});
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
