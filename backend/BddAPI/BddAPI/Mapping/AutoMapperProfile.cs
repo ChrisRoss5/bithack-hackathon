@@ -1,5 +1,6 @@
 using AutoMapper;
 using BddAPI.DTOs.Request;
+using BddAPI.DTOs.Response;
 using BddAPI.Models;
 
 namespace BddAPI.Mapping;
@@ -13,5 +14,8 @@ public class AutoMapperProfile : Profile
 
         CreateMap<CommunityHome, CommunityHomeRequestDto>();
         CreateMap<CommunityHomeRequestDto, CommunityHome>();
+
+        CreateMap<CommunityHome, CommunityHomeResponseDto>();
+        CreateMap<CommunityHomeResponseDto, CommunityHome>();
     }
 }

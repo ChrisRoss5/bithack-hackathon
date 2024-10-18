@@ -1,20 +1,20 @@
 using System.Text;
 using BddAPI.Data;
 using BddAPI.Enum;
+using BddAPI.Exceptions;
 using BddAPI.Mapping;
+using BddAPI.Repositories;
+using BddAPI.Services;
+using BddAPI.Services.Auth;
+using FirebaseAdmin;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddCors(
-    options =>
-    {
-        options.AddPolicy("AllowAll",
-            policyBuilder => { policyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
-    });
 
 var jwtSettings = builder.Configuration.GetSection("JWT");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Secret"]!);
@@ -78,10 +78,30 @@ builder.Services.AddDbContext<BddDbContext>(options =>
 {
     options.UseSqlServer("name=ConnectionStrings:DefaultConnection");
 });
-builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromFile("firebaseServiceAcc.json")
+});
+
+builder.Services.AddCors(
+    options =>
+    {
+        options.AddPolicy("AllowAll",
+            policyBuilder => { policyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+    });
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddControllers(options => { options.Filters.Add<BddExeptionFilter>(); });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton(FirebaseAuth.DefaultInstance);
+builder.Services.AddScoped<ICommunityHomeService, CommunityHomeService>();
+builder.Services.AddScoped<ICommunityHomeRepository, CommunityHomeRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 
@@ -89,8 +109,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("AllowAll");
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();

@@ -6,9 +6,9 @@ public class CommunityHomeRequestDto
 {
     [Required] [MaxLength(50)] public string Name { get; init; }
     [Required] [MaxLength(50)] public string Address { get; init; }
-    [Required] [MaxLength(50)] public double LeaseAmount { get; init; }
-    [Required] [MaxLength(50)] public double BailAmount { get; init; }
-    [Required] [MaxLength(50)] public double Area { get; init; }
-    [MaxLength(50)] public double CutleryPrice { get; init; }
-    [Required] [MaxLength(50)] public int Capacity { get; init; }
+    [Required] public double LeaseAmount { get; init; }
+    [Required] public double BailAmount { get; init; }
+    [Required] public double Area { get; init; }
+    public double? CutleryPrice { get; init; }
+    [Required] public int Capacity { get; init; }
 }
