@@ -1,33 +1,63 @@
 declare global {
-  interface User {
-    id: string;
-    email: string;
-    displayName: string;
-    role: string;
-  }
-
-  interface Center {
+  interface Home {
     id: string;
     name: string;
+    rentPrice: number;
     address: string;
-    settlement: string;
-    description: string;
+    leaseAmount: number;
+    bailAmount: number;
+    homeBills: number;
+    vat: number;
+    area: number;
+    cutleryPrice?: number;
     capacity: number;
-    price: number;
-    pictureUrl: string;
-    latitude: number;
-    longitude: number;
-    createdAt: string;
+    createdAt: Date;
   }
-
-  interface Reservation {
+  interface Contract {
     id: string;
     user: User;
-    center: Center;
-    reservationFrom: string;
-    reservationTo: string;
-    expectedNumberOfPeople: number;
-    additionalNotes: string;
-    createdAt: string;
+    home: Home;
+    status: ContractStatus;
+    dateOfIssue: Date;
+  }
+  interface ContractStatus {
+    Prepared: "Prepared";
+    MayorSigned: "MayorSigned";
+  }
+  interface Range {
+    id: string;
+    from: Date;
+    to: Date;
+  }
+  interface UsageRecord {
+    id: string;
+    contract?: Contract;
+    user?: User;
+    conditionBefore: string;
+    conditionAfter: string;
+    damageDone: string;
+    problems: string;
+    createdAt: Date;
+  }
+  interface User {
+    id: string;
+    username: string;
+    firstName?: string;
+    lastName?: string;
+    email: string;
+    address?: string;
+    city?: string;
+    oib?: string;
+    bank?: string;
+    postalCode?: string;
+    iban?: string;
+    phoneNumber?: string;
+    createdAt?: Date;
+    role: Role;
+  }
+  enum Role {
+    Superuser = "Superuser",
+    Admin = "Admin",
+    User = "User",
   }
 }

@@ -1,0 +1,26 @@
+{
+  "appName": "Bjelovar Community Homes",
+  "header": {
+    "contact": "Contact",
+    "aboutUs": "About Us",
+    "login": "Sign in",
+    "greeting": "Hello",
+    "userAccount": "User account",
+    "logout": "Sing out",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
+  "home": {
+    "title": "Book a community home",
+    "subtitle": "Places for events you remember",
+    "searchBox": {
+      "from": "From",
+      "to": "To",
+      "fromDescription": "Start of reservation",
+      "toDescription": "End of reservation",
+      "showAll": "Show All",
+      "search": "Search"
+    },
+    "reserve": "Reserve"
+  }
+}

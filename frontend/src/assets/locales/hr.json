@@ -1,0 +1,26 @@
+{
+  "appName": "Bjelovar Društveni Domovi",
+  "header": {
+    "contact": "Kontakt",
+    "aboutUs": "O nama",
+    "login": "Prijava",
+    "greeting": "Pozdrav",
+    "userAccount": "Korisnički račun",
+    "logout": "Odjava",
+    "lightMode": "Svijetli prikaz",
+    "darkMode": "Tamni prikaz"
+  },
+  "home": {
+    "title": "Rezerviraj društveni dom",
+    "subtitle": "Mjesta za događaje koje pamtiš",
+    "searchBox": {
+      "from": "Od",
+      "to": "Do",
+      "fromDescription": "Početak rezervacije",
+      "toDescription": "Kraj rezervacije",
+      "showAll": "Prikaži sve",
+      "search": "Pretraži"
+    },
+    "reserve": "Rezerviraj"
+  }
+}
