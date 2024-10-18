@@ -12,14 +12,14 @@ public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(op
     public DbSet<RefreshToken> RefreshTokens { get; init; }
     public DbSet<CommunityHome> CommunityHomes { get; init; }
     public DbSet<ContractRangeModel> ContractRangeModels { get; init; }
-    public DbSet<Contract> Contracts { get; init; }
+    public DbSet<ContractForSearch> Contracts { get; init; }
     public DbSet<Record> Records { get; init; }
-    public DbSet<RangeModel> RangeModels { get; init; }
+    public DbSet<ContractRange> RangeModels { get; init; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(
-            "server=localhost;Database=BjelovarDrustveniDomovi;User=SA;Password=reallyStrongPwd123;Trusted_Connection=False;TrustServerCertificate=True;MultipleActiveResultSets=true");
+            "server=.;Database=BjelovarDrustveniDomovi;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

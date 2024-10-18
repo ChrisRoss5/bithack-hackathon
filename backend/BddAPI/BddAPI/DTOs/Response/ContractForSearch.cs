@@ -3,7 +3,7 @@ using BddAPI.Enum;
 
 namespace BddAPI.Models;
 
-public class ContractForSearch
+public class Contract
 {
     [Key] public Guid Id { get; set; }
 

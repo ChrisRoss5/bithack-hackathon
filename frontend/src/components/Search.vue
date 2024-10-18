@@ -18,7 +18,6 @@ const startDate = ref("");
 const endDate = ref("");
 
 const handleSearch = () => {
-  console.log(startDate.value);
   const _startDate = startDate.value ? new Date(startDate.value) : undefined;
   const _endDate = endDate.value ? new Date(endDate.value) : undefined;
   emits("change", _startDate, _endDate);
@@ -60,7 +59,7 @@ const getFirstAvailableDate = () => {
             <input
               type="date"
               class="dsy-input ml-2 w-full"
-              :min="getFirstAvailableDate"
+              :min="getFirstAvailableDate()"
               v-model="startDate"
               @change="handleStartDateChange"
             />

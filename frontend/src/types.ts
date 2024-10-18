@@ -12,6 +12,11 @@ declare global {
     cutleryPrice?: number;
     capacity: number;
     createdAt: Date;
+    contracts: Contract[];
+  }
+  interface ContractForSearch {
+    userId: string;
+    contractRanges: Range[];
   }
   interface Contract {
     id: string;
@@ -19,6 +24,7 @@ declare global {
     home: Home;
     status: ContractStatus;
     dateOfIssue: Date;
+    ranges: Range[];
   }
   interface ContractStatus {
     Prepared: "Prepared";
