@@ -26,6 +26,18 @@ public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(op
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Record>()
+            .HasOne(r => r.User)
+            .WithMany()
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<Record>()
+            .HasOne(r => r.Contract)
+            .WithMany()
+            .HasForeignKey(r => r.ContractId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         modelBuilder.Entity<Role>().HasData(
             new Role
             {
