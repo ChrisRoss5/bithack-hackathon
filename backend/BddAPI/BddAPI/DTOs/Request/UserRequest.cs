@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BddAPI.Models;
+namespace BddAPI.DTOs.Request;
 
-public class User
+public class UserRequestDto
 {
-    [Key] public Guid Id { get; init; }
     [MaxLength(50)] public string? FirebaseUid { get; init; }
     [MaxLength(50)] public string Username { get; init; }
     [MaxLength(50)] public string? FirstName { get; init; }
@@ -17,6 +16,4 @@ public class User
     [MaxLength(50)] public string? PostalCode { get; init; }
     [MaxLength(50)] public string? Iban { get; init; }
     [MaxLength(50)] public string? PhoneNumber { get; init; }
-
-    public DateTime CreatedAt { get; init; } = DateTime.Now;
 }

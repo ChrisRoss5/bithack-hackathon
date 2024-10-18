@@ -13,6 +13,9 @@ public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(op
     public DbSet<Role> Roles { get; init; }
     public DbSet<UserRole> UserRoles { get; init; }
     public DbSet<RefreshToken> RefreshTokens { get; init; }
+    public DbSet<ContractDocument> ContractDocuments { get; init; }
+    public DbSet<RequestDocument> RequestDocuments { get; init; }
+    public DbSet<RecordDocument> RecordDocuments { get; init; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
