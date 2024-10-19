@@ -7,7 +7,7 @@ namespace BddAPI.Models
         [Key] public Guid Id { get; set; }
 
         public Guid ContractId { get; set; }
-        public ContractForSearch Contract { get; set; }
+        public Contract Contract { get; set; }
 
         public Guid UserId { get; set; }
         public User User { get; set; }

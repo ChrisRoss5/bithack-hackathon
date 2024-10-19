@@ -17,5 +17,14 @@ public class AutoMapperProfile : Profile
 
         CreateMap<CommunityHome, CommunityHomeResponseDto>();
         CreateMap<CommunityHomeResponseDto, CommunityHome>();
+
+        CreateMap<Contract, ContractRequestDto>();
+        CreateMap<ContractRequestDto, Contract>();
+
+        CreateMap<Contract, ContractResponseDto>();
+        CreateMap<ContractResponseDto, Contract>();
+
+        CreateMap<ContractRangeRequestDto, ContractRange>();
+        CreateMap<ContractRange, ContractRangeRequestDto>();
     }
 }

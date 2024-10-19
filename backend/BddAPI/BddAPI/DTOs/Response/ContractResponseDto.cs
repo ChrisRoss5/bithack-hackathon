@@ -1,11 +1,11 @@
-using System.ComponentModel.DataAnnotations;
 using BddAPI.Enum;
+using BddAPI.Models;
 
-namespace BddAPI.Models;
+namespace BddAPI.DTOs.Response;
 
-public class Contract
+public class ContractResponseDto
 {
-    [Key] public Guid Id { get; set; }
+    public Guid Id { get; set; }
 
     public User User { get; set; }
     public Guid UserId { get; set; }
@@ -15,5 +15,5 @@ public class Contract
 
     public ContractStatus Status { get; set; } = ContractStatus.Prepared;
 
-    public DateTime DateOfIssue { get; set; } = DateTime.Now;
+    public DateTime DateOfIssue { get; set; }
 }

@@ -45,9 +45,9 @@ public class CommunityHomeController(ICommunityHomeService communityHomeService)
     }
 
     [HttpGet("get-by-availability")]
-    public async Task<IActionResult> GetCommunityCentersByAvailabilityAsync(DateTime startDate, DateTime endDate)
+    public async Task<IActionResult> GetCommunityCentersByAvailabilityAsync(DateTime from, DateTime to)
     {
-        var communityCenters = await communityHomeService.GetCommunityCentersByAvailabilityAsync(startDate, endDate);
+        var communityCenters = await communityHomeService.SearchCommunityHomesWithContractsAsync(from, to);
         return Ok(communityCenters);
     }
 }
