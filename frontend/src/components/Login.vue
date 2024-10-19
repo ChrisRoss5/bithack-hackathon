@@ -45,7 +45,7 @@ async function loginToDOTNET(result: any) {
   const idToken2 = await getAuth().currentUser?.getIdToken();
   //console.log(`accessToken: ${accessToken}`);
   //console.log(`idToken: ${idToken}`);
-  //console.log(`getIdToken: ${idToken2}`);
+  console.log(`getIdToken: ${idToken2}`);
 
   const response = await authStore.client.post(URLS.FIREBASE_LOGIN_URL, null, {
     params: {

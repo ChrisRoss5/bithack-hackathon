@@ -24,7 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="sticky top-[-1px] z-10 h-0" ref="stickyDiv">
+  <div class="sticky top-[-1px] z-20 h-0" ref="stickyDiv">
     <div
       class="flex w-full flex-wrap items-center gap-5 p-4 transition-all duration-300 lg:p-8"
       :class="{

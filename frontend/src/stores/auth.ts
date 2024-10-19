@@ -10,12 +10,12 @@ interface Tokens {
   refreshToken: string;
 }
 
-const REST_API_URL = "https://localhost:7283/api"; // Todo: import.meta.env.VITE_REST_API_URL;
+const REST_API_URL = "https://localhost:7044/api"; // Todo: import.meta.env.VITE_REST_API_URL;
 export const URLS = {
   REST_API_URL,
   REFRESH_TOKEN_URL: `${REST_API_URL}/auth/refresh-token`,
   FIREBASE_LOGIN_URL: `${REST_API_URL}/auth/authorize-firebase-client`,
-  GET_HOMES_BY_AVAILABILITY: `${REST_API_URL}/homes/get-by-availability`,
+  GET_HOMES_BY_AVAILABILITY: `${REST_API_URL}/community-homes/get-by-availability`,
 };
 
 const AXIOS_CLIENT_OPTIONS: CreateAxiosDefaults = {

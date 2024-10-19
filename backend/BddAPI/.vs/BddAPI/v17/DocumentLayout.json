@@ -1,12 +1,105 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|c:\\users\\krist\\desktop\\github\\bithack-hackathon\\backend\\bddapi\\bddapi\\repositories\\contractrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|solutionrelative:bddapi\\repositories\\contractrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|c:\\users\\krist\\desktop\\github\\bithack-hackathon\\backend\\bddapi\\bddapi\\data\\bdddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|solutionrelative:bddapi\\data\\bdddbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|c:\\users\\krist\\desktop\\github\\bithack-hackathon\\backend\\bddapi\\bddapi\\services\\communityhomeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|solutionrelative:bddapi\\services\\communityhomeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|c:\\users\\krist\\desktop\\github\\bithack-hackathon\\backend\\bddapi\\bddapi\\repositories\\communityhomerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|solutionrelative:bddapi\\repositories\\communityhomerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|c:\\users\\krist\\desktop\\github\\bithack-hackathon\\backend\\bddapi\\bddapi\\models\\contractrange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BDB50C75-5BD7-4C7D-AB92-64675334B7AC}|BddAPI\\BddAPI.csproj|solutionrelative:bddapi\\models\\contractrange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BddDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Data\\BddDbContext.cs",
+              "RelativeDocumentMoniker": "BddAPI\\Data\\BddDbContext.cs",
+              "ToolTip": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Data\\BddDbContext.cs",
+              "RelativeToolTip": "BddAPI\\Data\\BddDbContext.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAuwBIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T08:55:32.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ContractRepository.cs",
+              "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Repositories\\ContractRepository.cs",
+              "RelativeDocumentMoniker": "BddAPI\\Repositories\\ContractRepository.cs",
+              "ToolTip": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Repositories\\ContractRepository.cs",
+              "RelativeToolTip": "BddAPI\\Repositories\\ContractRepository.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAwwDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T08:18:26.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CommunityHomeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Repositories\\CommunityHomeRepository.cs",
+              "RelativeDocumentMoniker": "BddAPI\\Repositories\\CommunityHomeRepository.cs",
+              "ToolTip": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Repositories\\CommunityHomeRepository.cs",
+              "RelativeToolTip": "BddAPI\\Repositories\\CommunityHomeRepository.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAiwAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T08:16:03.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CommunityHomeService.cs",
+              "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Services\\CommunityHomeService.cs",
+              "RelativeDocumentMoniker": "BddAPI\\Services\\CommunityHomeService.cs",
+              "ToolTip": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Services\\CommunityHomeService.cs",
+              "RelativeToolTip": "BddAPI\\Services\\CommunityHomeService.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAqwJYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T08:09:08.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ContractRange.cs",
+              "DocumentMoniker": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Models\\ContractRange.cs",
+              "RelativeDocumentMoniker": "BddAPI\\Models\\ContractRange.cs",
+              "ToolTip": "C:\\Users\\krist\\Desktop\\Github\\bithack-hackathon\\backend\\BddAPI\\BddAPI\\Models\\ContractRange.cs",
+              "RelativeToolTip": "BddAPI\\Models\\ContractRange.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T08:08:45.747Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

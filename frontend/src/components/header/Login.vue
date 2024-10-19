@@ -25,7 +25,7 @@ const handleLogout = () => {
     class="dsy-dropdown dsy-dropdown-end dsy-dropdown-hover"
   >
     <button class="dsy-btn m-1" :class="{ 'bg-base-100': inDrawer }">
-      {{ t("header.greeting") }}, {{ authStore.userInfo?.displayName }}
+      {{ t("header.greeting") }}, {{ authStore.userInfo?.username }}
     </button>
     <ul
       tabindex="0"

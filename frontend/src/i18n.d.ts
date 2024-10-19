@@ -29,6 +29,10 @@ declare module "vue-i18n" {
         search: string;
       },
       reserve: string;
+      cancel: string;
+      hour: string;
+      free: string;
+      partlyFree: string;
     }
   }
 

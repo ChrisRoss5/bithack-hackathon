@@ -18,7 +18,7 @@ public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(op
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(
-            "server=localhost;Database=BjelovarDrustveniDomovi;User=SA;Password=reallyStrongPwd123;Trusted_Connection=False;TrustServerCertificate=True;MultipleActiveResultSets=true");
+            "server=localhost;Database=BjelovarDrustveniDomovi;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

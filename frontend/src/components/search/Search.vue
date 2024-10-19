@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSearchStore } from "@/stores/search";
 import { formatDate } from "@/utils/format";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
@@ -7,25 +8,24 @@ defineProps<{
   isCollapsed?: boolean;
 }>();
 const emits = defineEmits<{
-  (e: "change", startDate?: Date, endDate?: Date): void;
+  (e: "change", from?: Date, to?: Date): void;
 }>();
 
 const { t } = useI18n();
-
-const endDateInput = ref<HTMLInputElement | null>(null);
-
-const startDate = ref("");
-const endDate = ref("");
+const searchStore = useSearchStore();
+const toInput = ref<HTMLInputElement | null>(null);
 
 const handleSearch = () => {
-  const _startDate = startDate.value ? new Date(startDate.value) : undefined;
-  const _endDate = endDate.value ? new Date(endDate.value) : undefined;
-  emits("change", _startDate, _endDate);
+  const _from = searchStore.dateFrom
+    ? new Date(searchStore.dateFrom)
+    : undefined;
+  const _to = searchStore.dateTo ? new Date(searchStore.dateTo) : undefined;
+  emits("change", _from, _to);
 };
 
-const handleStartDateChange = () => {
-  if (!endDate.value) {
-    endDateInput.value?.showPicker();
+const handlefromChange = () => {
+  if (!searchStore.dateTo) {
+    toInput.value?.showPicker();
   }
 };
 
@@ -60,8 +60,8 @@ const getFirstAvailableDate = () => {
               type="date"
               class="dsy-input ml-2 w-full"
               :min="getFirstAvailableDate()"
-              v-model="startDate"
-              @change="handleStartDateChange"
+              v-model="searchStore.dateFrom"
+              @change="handlefromChange"
             />
           </label>
           <div class="text-nowrap text-neutral-500" v-show="!isCollapsed">
@@ -74,9 +74,9 @@ const getFirstAvailableDate = () => {
             <input
               type="date"
               class="dsy-input ml-2 w-full"
-              :min="startDate"
-              v-model="endDate"
-              ref="endDateInput"
+              :min="searchStore.dateFrom"
+              v-model="searchStore.dateTo"
+              ref="toInput"
             />
           </label>
           <div class="text-nowrap text-neutral-500" v-show="!isCollapsed">
