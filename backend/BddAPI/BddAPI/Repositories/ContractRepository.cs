@@ -37,29 +37,39 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
 
     public async Task<List<CommunityHomeWithContracts>> GetContractsForSearch(DateTime from, DateTime to)
     {
-        var contractRanges = await dbContext.ContractRanges
+        // Get the contract range ContractIds that fall within the date range
+        var contractRangeIds = await dbContext.ContractRanges
             .Where(cr => cr.From >= from && cr.To <= to)
+            .Select(cr => cr.ContractId) // We only need the ContractId at this stage
             .ToListAsync();
 
-        var contracts = await dbContext.Contracts.Where(c => contractRanges.Any(cr => cr.ContractId == c.Id))
+        // Use Contains to filter contracts that match the contractRangeIds
+        var contracts = await dbContext.Contracts
+            .Where(c => contractRangeIds.Contains(c.Id)) // This is the critical Contains
             .ToListAsync();
 
+        // Fetch all community homes
         var communityHomes = await dbContext.CommunityHomes.ToListAsync();
 
-        List<CommunityHomeWithContracts> communityHomeWithContracts = [];
+        // Initialize the result list
+        var communityHomeWithContracts = new List<CommunityHomeWithContracts>();
 
+        // For each community home, find its related contracts and contract ranges
         foreach (var communityHome in communityHomes)
         {
+            // Find contracts for this specific community home
             var contractsForSearch = contracts
                 .Where(c => c.CommunityHomeId == communityHome.Id)
                 .Select(c => new ContractForSearch
                 {
                     CommunityHomeId = c.CommunityHomeId,
                     CommunityHome = communityHome,
-                    ContractRanges = contractRanges.Where(cr => cr.ContractId == c.Id).ToList()
+                    ContractRanges =
+                        dbContext.ContractRanges.Where(cr => cr.ContractId == c.Id).ToList() // Load related ranges
                 })
                 .ToList();
 
+            // Add to the result list
             communityHomeWithContracts.Add(new CommunityHomeWithContracts
             {
                 Id = communityHome.Id,
