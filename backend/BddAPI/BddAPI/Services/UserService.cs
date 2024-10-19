@@ -14,8 +14,8 @@ public interface IUserService
     Task<UserResponseDto> GetUserByFirebaseUid(string firebaseUid);
     Task<UserResponseDto> UpdateUserAsync(Guid userId, UserRequestDto userRequestDto);
     Task<UserResponseDto> GetUserById(Guid userId);
-    Task AssignRoleToUserAsync(RoleType roleType, string firebaseUid);
-    Task DeleteUserAsync(string firebaseUid);
+    Task AssignRoleToUserAsync(RoleType roleType, Guid userId);
+    Task DeleteUserAsync(Guid userId);
 }
 
 public class UserService(IUserRepository userRepository, IMapper mapper) : IUserService
@@ -76,9 +76,9 @@ public class UserService(IUserRepository userRepository, IMapper mapper) : IUser
         return mapper.Map<UserResponseDto>(user);
     }
 
-    public async Task AssignRoleToUserAsync(RoleType roleType, string firebaseUid)
+    public async Task AssignRoleToUserAsync(RoleType roleType, Guid userId)
     {
-        var user = await userRepository.GetUserByFirebaseUid(firebaseUid);
+        var user = await userRepository.GetUserById(userId);
         if (user == null)
             throw new UserException("User not found");
 
@@ -92,9 +92,9 @@ public class UserService(IUserRepository userRepository, IMapper mapper) : IUser
         await userRepository.SaveChangesAsync();
     }
 
-    public async Task DeleteUserAsync(string firebaseUid)
+    public async Task DeleteUserAsync(Guid userId)
     {
-        var existingUser = await userRepository.GetUserByFirebaseUid(firebaseUid);
+        var existingUser = await userRepository.GetUserById(userId);
 
         if (existingUser == null)
             throw new NotFoundException("User not found");

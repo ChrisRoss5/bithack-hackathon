@@ -22,9 +22,9 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpDelete("delete")]
-    public async Task<IActionResult> DeleteUser(string firebaseUid)
+    public async Task<IActionResult> DeleteUser(Guid userId)
     {
-        await userService.DeleteUserAsync(firebaseUid);
+        await userService.DeleteUserAsync(userId);
         return Ok();
     }
 
@@ -35,9 +35,9 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpPost("assign-role")]
-    public async Task<IActionResult> AssignRoleToUser(RoleType roleType, string firebaseUid)
+    public async Task<IActionResult> AssignRoleToUser(RoleType roleType, Guid userId)
     {
-        await userService.AssignRoleToUserAsync(roleType, firebaseUid);
+        await userService.AssignRoleToUserAsync(roleType, userId);
         return Ok();
     }
 }
