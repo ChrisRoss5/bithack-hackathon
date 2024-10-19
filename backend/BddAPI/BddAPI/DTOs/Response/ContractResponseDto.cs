@@ -15,6 +15,7 @@ public class ContractResponseDto
     public bool IsFree { get; set; }
     public string LeasePurpose { get; set; }
     public bool UsingCutlery { get; set; }
+    public double Vat { get; set; }
 
     public ContractStatus Status { get; set; } = ContractStatus.Prepared;
 

@@ -85,7 +85,6 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
                 LeaseAmount = communityHome.LeaseAmount,
                 BailAmount = communityHome.BailAmount,
                 HomeBills = communityHome.HomeBills,
-                Vat = communityHome.Vat,
                 Area = communityHome.Area,
                 CutleryPrice = communityHome.CutleryPrice,
                 Capacity = communityHome.Capacity,

@@ -12,7 +12,6 @@ public class CommunityHome
     [Required] public double LeaseAmount { get; init; }
     [Required] public double BailAmount { get; init; }
     [Required] public double HomeBills { get; set; }
-    [Required] public double Vat { get; set; }
     [Required] public double Area { get; init; }
     public double? CutleryPrice { get; init; }
     [Required] public int Capacity { get; init; }
