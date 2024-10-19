@@ -57,7 +57,7 @@ async function loginToDOTNET(result: any) {
     accessToken: response.data.accessToken,
     refreshToken: response.data.refreshToken,
   });
-  router.push("/");
+  router.replace("/korisnik");
 }
 </script>
 

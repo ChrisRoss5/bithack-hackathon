@@ -8,7 +8,8 @@
     "userAccount": "Korisnički račun",
     "logout": "Odjava",
     "lightMode": "Svijetli prikaz",
-    "darkMode": "Tamni prikaz"
+    "darkMode": "Tamni prikaz",
+    "myContracts": "Moji ugovori"
   },
   "home": {
     "title": "Rezerviraj društveni dom",
@@ -26,5 +27,21 @@
     "hour": "Sat",
     "free": "Slobodno",
     "partlyFree": "Djelomično slobodno"
-  }
+  },
+  "account": {
+  "completeProfile": "Molimo, ispunite profil kako biste mogli rezervirati domove.",
+    "username": "Korisničko ime",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "email": "Email",
+    "address": "Adresa",
+    "city": "Grad",
+    "oib": "OIB",
+    "postalCode": "Poštanski broj",
+    "phoneNumber": "Broj telefona"
+  },
+  "save": "Spremi",
+  "operationSuccess": "Uspješno izvšeno!",
+  "serverError": "Greška na serveru!",
+  "freeCondition": "Besplatni najam za događaje (karmine, dobrovoljno vatrogasno društvo)"
 }

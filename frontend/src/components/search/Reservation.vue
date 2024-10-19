@@ -1,6 +1,8 @@
 <!-- https://github.com/vueform/slider?tab=readme-ov-file#installation -->
 
 <script setup lang="ts">
+import { useAuthStore } from "@/stores/auth";
+import { useContractsStore } from "@/stores/contracts";
 import { useSearchStore } from "@/stores/search";
 import Slider from "@vueform/slider";
 import { computed, onMounted, ref } from "vue";
@@ -11,11 +13,10 @@ const emits = defineEmits<{ (e: "cancel"): void }>();
 
 const { t } = useI18n();
 const searchStore = useSearchStore();
+const authStore = useAuthStore();
+const contractsStore = useContractsStore();
 
 const reservationDiv = ref<HTMLElement | null>(null);
-const submitReservation = () => {
-  console.log("SUBMITTING RESERVATION");
-};
 
 onMounted(() => {
   reservationDiv!.value?.scrollIntoView({ behavior: "smooth" });
@@ -43,7 +44,6 @@ const sliderDefaultParams = {
     behaviour: "drag",
   },
 };
-
 for (let d = date1; d <= date2; d.setDate(d.getDate() + 1)) {
   const occupiedRanges = props.home.contracts.flatMap((contract) => {
     const ranges = contract.contractRanges;
@@ -69,7 +69,6 @@ for (let d = date1; d <= date2; d.setDate(d.getDate() + 1)) {
     }),
   });
 }
-
 const applySliderToAll = ref(true);
 const areDaysValid = computed(() => {
   for (const day of days.value) {
@@ -93,18 +92,67 @@ const handleSliderUpdate = (e: [number, number]) => {
     });
   }
 };
+
+const leasePurpose = ref("");
+const isContractFree = ref(false);
+const usingCutlery = ref(false);
+const contractForm = computed<ContractForm>(() => ({
+  contractRequest: {
+    userId: authStore.userInfo!.id!,
+    communityHomeId: props.home.id,
+    leasePurpose: leasePurpose.value,
+    isfree: isContractFree.value,
+    usingCutlery: usingCutlery.value,
+  },
+  contractRanges: days.value.map((day) => {
+    const from = new Date(day.date);
+    const to = new Date(day.date);
+    from.setHours(day.slider.value[0]);
+    to.setHours(day.slider.value[1]);
+    return { from, to };
+  }),
+}));
+const totalHours = computed(() => {
+  return days.value.reduce((acc, day) => {
+    return acc + day.slider.value[1] - day.slider.value[0];
+  }, 0);
+});
+const totalLeasePrice = computed(() => {
+  return isContractFree
+    ? 0
+    : totalHours.value * props.home.leaseAmount + props.home.bailAmount;
+});
+const totalPrice = computed(() => {
+  return (
+    (totalLeasePrice.value + props.home.homeBills) * totalHours.value +
+    props.home.bailAmount +
+    (usingCutlery.value ? props.home.cutleryPrice! : 0)
+  );
+});
+
+const submitReservation = async () => {
+  console.log("SUBMITTING RESERVATION");
+  console.log(contractForm.value);
+  contractsStore.submitContract(contractForm.value);
+};
 </script>
 
 <template>
   <div ref="reservationDiv" class="mt-6">
     <figure>
-      <img src="@/assets/images/no-image-en.svg" alt="" />
+      <img
+        v-if="home.pictureUrl"
+        :src="home.pictureUrl"
+        class="w-full"
+        alt=""
+      />
+      <img v-else src="@/assets/images/no-image-en.svg" alt="" />
     </figure>
     <div class="dsy-card-body">
       <h2 class="dsy-card-title mb-4 flex-wrap text-3xl">
         {{ home.name }}
         <div
-          class="dsy-badge h-auto px-2 py-1"
+          class="dsy-badge ml-3 h-auto px-2 py-1 text-2xl"
           :class="{
             'dsy-badge-success text-base-100': !home.contracts.length,
             'dsy-badge-warning': home.contracts.length,
@@ -137,19 +185,27 @@ const handleSliderUpdate = (e: [number, number]) => {
       </div>
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined pr-1"> group </span>
+        Površina: {{ home.area }}
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined pr-1"> group </span>
         Kapacitet: {{ home.capacity }}
       </div>
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined pr-1"> euro </span>
-        Cijena zakupa: {{ home.leaseAmount }} / {{ t("home.hour") }}
+        Cijena najma: {{ home.leaseAmount }}€ / {{ t("home.hour") }}
       </div>
       <div class="flex items-center gap-3">
         <span class="material-symbols-outlined pr-1"> euro </span>
-        Cijena jamčevine: {{ home.bailAmount }}
+        Cijena režija: {{ home.homeBills }}€ / dan
       </div>
       <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined"> restaurant </span>Cijena zakupa
-        pribora: {{ home.cutleryPrice || "—" }}
+        <span class="material-symbols-outlined pr-1"> euro </span>
+        Cijena jamčevine: {{ home.bailAmount }}€
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined"> restaurant </span>Cijena najma
+        pribora: {{ home.cutleryPrice ? home.cutleryPrice + "€" : "—" }}
       </div>
       <div class="dsy-divider"></div>
       <label class="flex-center mb-10 gap-3">
@@ -169,7 +225,7 @@ const handleSliderUpdate = (e: [number, number]) => {
             <div
               v-for="(occupiedSlider, i) in day.occupiedSliders"
               :key="i"
-              class="pointer-events-none absolute inset-0 z-10"
+              class="pointer-events-none absolute inset-0 z-[2]"
             >
               <Slider
                 class="slider slider-occupied"
@@ -196,7 +252,39 @@ const handleSliderUpdate = (e: [number, number]) => {
         zauzetim.
       </div>
       <div class="dsy-divider"></div>
-
+      <div class="flex flex-wrap gap-3">
+        <input
+          type="checkbox"
+          class="dsy-toggle dsy-toggle-primary"
+          v-model="isContractFree"
+        />
+        {{ t("freeCondition") }}
+      </div>
+      <div class="flex flex-wrap gap-3" v-if="home.cutleryPrice">
+        <input
+          type="checkbox"
+          class="dsy-toggle dsy-toggle-primary"
+          v-model="usingCutlery"
+        />
+        Najam pribora ({{ home.cutleryPrice }}€)
+      </div>
+      <div class="flex flex-wrap gap-3 pt-3">
+        Razlog najma:
+        <textarea
+          class="dsy-textarea dsy-textarea-bordered w-full"
+          :placeholder="'Unesi rečenicu ili dvije...'"
+          v-model="leasePurpose"
+        ></textarea>
+      </div>
+      <div class="dsy-divider"></div>
+      <div class="text-right text-xl font-bold">
+        Ukupno sati: {{ totalHours }}h
+        <br />
+        Ukupna cijena najma (({{ home.leaseAmount }}€ + {{ home.homeBills }}€) *
+        {{ totalHours }}h + {{ home.bailAmount }}€){{
+          usingCutlery ? " + " + home.cutleryPrice + "€" : ""
+        }}: {{ totalPrice }}€
+      </div>
       <div class="dsy-divider"></div>
       <div class="flex">
         <div class="dsy dsy-btn flex-1" @click="emits('cancel')">
@@ -204,7 +292,7 @@ const handleSliderUpdate = (e: [number, number]) => {
         </div>
         <div
           class="dsy-btn dsy-btn-outline flex-1"
-          :class="{ 'dsy-btn-disabled': !areDaysValid }"
+          :class="{ 'dsy-btn-disabled': !areDaysValid || !leasePurpose }"
           @click="submitReservation"
         >
           {{ t("home.reserve") }}
@@ -214,7 +302,6 @@ const handleSliderUpdate = (e: [number, number]) => {
   </div>
 </template>
 
-<style src="@vueform/slider/themes/default.css"></style>
 <style>
 .slider {
   --slider-height: 1rem;

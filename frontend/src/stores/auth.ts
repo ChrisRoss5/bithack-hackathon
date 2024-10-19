@@ -4,6 +4,9 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { createAxiosClient } from "../services/createAxiosClient";
 import { DecodedJwt, formatDecodedData } from "../utils/jwt";
+import { getAuth } from "firebase/auth";
+import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
 
 interface Tokens {
   accessToken: string;
@@ -16,6 +19,9 @@ export const URLS = {
   REFRESH_TOKEN_URL: `${REST_API_URL}/auth/refresh-token`,
   FIREBASE_LOGIN_URL: `${REST_API_URL}/auth/authorize-firebase-client`,
   GET_HOMES_BY_AVAILABILITY: `${REST_API_URL}/community-homes/get-by-availability`,
+  GET_USER_INFO: `${REST_API_URL}/users/get-by-id`,
+  UPDATE_USER_INFO: `${REST_API_URL}/users/update`,
+  CREATE_CONTRACT: `${REST_API_URL}/contracts/create`,
 };
 
 const AXIOS_CLIENT_OPTIONS: CreateAxiosDefaults = {
@@ -37,6 +43,9 @@ function removeTokensFromLocalStorage() {
 }
 
 export const useAuthStore = defineStore("auth", () => {
+  const toast = useToast();
+  const { t } = useI18n();
+
   const accessToken = ref(localStorage.getItem("accessToken"));
   const refreshToken = ref(localStorage.getItem("refreshToken"));
   const isLoggedIn = computed(() => !!accessToken.value);
@@ -80,11 +89,36 @@ export const useAuthStore = defineStore("auth", () => {
     }),
   );
 
+  const getUserInfo = async () => {
+    const response = await axiosClient.value.get(URLS.GET_USER_INFO, {
+      params: { userId: userInfo.value!.id },
+    });
+    if (response.status === 200) {
+      userInfo.value = response.data;
+    }
+  };
+
+  const updateUserInfo = async () => {
+    userInfo.value!.firebaseUid = getAuth().currentUser?.uid;
+    console.log("Updating user info", userInfo.value);
+    const response = await axiosClient.value.put(
+      URLS.UPDATE_USER_INFO,
+      userInfo.value,
+      {
+        params: { userId: userInfo.value!.id },
+      },
+    );
+    if (response.status === 200) toast.success(t("operationSuccess"));
+    else toast.error(t("serverError"));
+  };
+
   return {
     userInfo,
     isLoggedIn,
     onLogin,
     onLogout,
     client: axiosClient,
+    getUserInfo,
+    updateUserInfo,
   };
 });

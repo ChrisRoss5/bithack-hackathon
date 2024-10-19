@@ -8,7 +8,8 @@
     "userAccount": "User account",
     "logout": "Sing out",
     "lightMode": "Light mode",
-    "darkMode": "Dark mode"
+    "darkMode": "Dark mode",
+    "myContracts": "My contracts"
   },
   "home": {
     "title": "Book a community home",
@@ -26,5 +27,21 @@
     "hour": "Hour",
     "free": "Free",
     "partlyFree": "Partly free"
-  }
+  },
+  "account": {
+    "completeProfile": "Please fill out your profile to be able to book homes.",
+    "username": "Username",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal code",
+    "oib": "OIB",
+    "phoneNumber": "Phone number"
+  },
+  "save": "Save",
+  "operationSuccess": "Operation successful!",
+  "serverError": "Server error!",
+  "freeCondition": "Free rental for events (karmine, voluntary fire brigade)"
 }

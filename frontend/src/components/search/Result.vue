@@ -15,7 +15,8 @@ const { t } = useI18n();
 <template>
   <div :id="home.id">
     <figure>
-      <img src="@/assets/images/no-image-en.svg" alt="" />
+      <img v-if="home.pictureUrl" :src="home.pictureUrl" alt="" />
+      <img v-else src="@/assets/images/no-image-en.svg" alt="" />
     </figure>
     <div class="dsy-card-body">
       <h2 class="dsy-card-title flex-wrap">
@@ -34,14 +35,18 @@ const { t } = useI18n();
         <span class="material-symbols-outlined"> location_on </span
         >{{ home.address }}
       </div>
-      <div class="dsy-card-actions justify-end mt-3">
+      <div class="dsy-card-actions mt-3 justify-end">
+        <div class="dsy-badge dsy-badge-outline h-auto px-2 py-1">
+          <span class="material-symbols-outlined pr-1"> responsive_layout </span>
+          {{ home.area }} m<sup>2</sup>
+        </div>
         <div class="dsy-badge dsy-badge-outline h-auto px-2 py-1">
           <span class="material-symbols-outlined pr-1"> group </span>
           {{ home.capacity }}
         </div>
         <div class="dsy-badge dsy-badge-outline h-auto px-2 py-1">
           <span class="material-symbols-outlined pr-1"> euro </span>
-          {{ home.leaseAmount }} / {{ t("home.hour") }}
+          {{ home.leaseAmount }}€ / {{ t("home.hour") }}
         </div>
         <div
           class="dsy-badge dsy-badge-outline h-auto px-2 py-1"

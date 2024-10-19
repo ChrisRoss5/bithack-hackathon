@@ -16,6 +16,7 @@ declare module "vue-i18n" {
       logout: string;
       lightMode: string;
       darkMode: string;
+      myContracts: string;
     };
     home: {
       title: string;
@@ -33,7 +34,23 @@ declare module "vue-i18n" {
       hour: string;
       free: string;
       partlyFree: string;
-    }
+    },
+    account: {
+      completeProfile: string;
+      username: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      address: string;
+      city: string;
+      oib: string;
+      postalCode: string;
+      phoneNumber: string;
+    },
+    save: string;
+    operationSuccess: string;
+    serverError: string;
+    freeCondition: string;
   }
 
   export interface DefineDateTimeFormat {

@@ -33,6 +33,12 @@ const handleLogout = () => {
     >
       <li @click="handleClick">
         <RouterLink to="/korisnik">
+          {{ t("header.myContracts") }}
+          <span class="material-symbols-outlined ml-auto"> list_alt </span>
+        </RouterLink>
+      </li>
+      <li @click="handleClick">
+        <RouterLink to="/korisnik">
           {{ t("header.userAccount") }}
           <span class="material-symbols-outlined ml-auto"> person </span>
         </RouterLink>

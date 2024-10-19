@@ -11,6 +11,7 @@ declare global {
     area: number;
     cutleryPrice?: number;
     capacity: number;
+    pictureUrl: string;
     createdAt: Date;
     contracts: ContractForSearch[];
   }
@@ -20,10 +21,21 @@ declare global {
   }
   interface Contract {
     id: string;
+    isFree: boolean;
     user: User;
     home: Home;
     status: ContractStatus;
     dateOfIssue: Date;
+    contractRanges: ContractRange[];
+  }
+  interface ContractForm {
+    contractRequest: {
+      userId: string;
+      communityHomeId: string;
+      leasePurpose: string;
+      isfree: boolean;
+      usingCutlery: boolean;
+    },
     contractRanges: ContractRange[];
   }
   interface ContractStatus {
@@ -46,7 +58,8 @@ declare global {
     createdAt: Date;
   }
   interface User {
-    id: string;
+    firebaseUid?: string;
+    id?: string;
     username: string;
     firstName?: string;
     lastName?: string;
