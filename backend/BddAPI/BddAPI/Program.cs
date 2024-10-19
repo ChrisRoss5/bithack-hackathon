@@ -1,5 +1,7 @@
 using System.Text;
+using System.Xml.Schema;
 using BddAPI.Data;
+using BddAPI.DTOs.Request;
 using BddAPI.Enum;
 using BddAPI.Exceptions;
 using BddAPI.Mapping;
@@ -91,6 +93,8 @@ builder.Services.AddCors(
             policyBuilder => { policyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
     });
 
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 builder.Services.AddControllers(options => { options.Filters.Add<BddExeptionFilter>(); });
 builder.Services.AddEndpointsApiExplorer();
@@ -107,6 +111,7 @@ builder.Services.AddScoped<IContractService, ContractService>();
 builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 builder.Services.AddScoped<IRecordRepository, RecordRepository>();
 builder.Services.AddScoped<IRecordService, RecordService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 var app = builder.Build();
 
