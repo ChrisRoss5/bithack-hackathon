@@ -11,8 +11,10 @@ public interface IUserRepository
     Task<User?> GetUserByUsernameAsync(string username);
     Task<User?> GetUserByRefreshToken(string refreshToken);
     Task<User?> GetUserByFirebaseUid(string username);
+    Task<User?> GetUserById(Guid userId);
     Task AssignRoleToUser(UserRole role);
     Task<IEnumerable<Role>> GetUserRoles(Guid userId);
+    Task<Role> GetRoleByName(string roleName);
     Task<User> UpdateUser(User user);
     Task<Role> GetDefaultRole();
     Task DeleteUser(User user);
@@ -45,6 +47,11 @@ public class UserRepository(BddDbContext dbContext) : IUserRepository
         return await dbContext.Users.FirstOrDefaultAsync(u => u.FirebaseUid == username);
     }
 
+    public async Task<User?> GetUserById(Guid userId)
+    {
+        return await dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+    }
+
     public async Task AssignRoleToUser(UserRole userRole)
     {
         await dbContext.UserRoles.AddAsync(userRole);
@@ -56,6 +63,12 @@ public class UserRepository(BddDbContext dbContext) : IUserRepository
             .Where(ur => ur.UserId == userId)
             .Select(ur => ur.Role)
             .ToListAsync();
+    }
+
+    public async Task<Role> GetRoleByName(string roleName)
+    {
+        return await dbContext.Roles.FirstOrDefaultAsync(r => r.Name == roleName) ??
+               throw new NotFoundException("Role not found");
     }
 
     public async Task<User> UpdateUser(User user)
