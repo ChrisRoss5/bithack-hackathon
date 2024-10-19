@@ -18,6 +18,7 @@ public class CommunityHomeWithContracts
     public double? CutleryPrice { get; init; }
     public int Capacity { get; init; }
     public DateTime CreatedAt { get; init; }
+    public string PictureUrl { get; init; }
 
     public required List<ContractForSearch> Contracts { get; set; }
 }

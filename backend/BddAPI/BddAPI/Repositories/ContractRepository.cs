@@ -90,7 +90,8 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
                 CutleryPrice = communityHome.CutleryPrice,
                 Capacity = communityHome.Capacity,
                 CreatedAt = communityHome.CreatedAt,
-                Contracts = contractsForSearch
+                Contracts = contractsForSearch,
+                PictureUrl = communityHome.PictureUrl
             });
         }
 
