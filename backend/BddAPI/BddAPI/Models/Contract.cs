@@ -9,10 +9,10 @@ public class Contract
 
     public User User { get; set; }
     public Guid UserId { get; set; }
-
     public CommunityHome CommunityHome { get; set; }
     public Guid CommunityHomeId { get; set; }
 
+    public bool IsFree { get; set; } = false;
     public ContractStatus Status { get; set; } = ContractStatus.Prepared;
 
     public DateTime DateOfIssue { get; set; } = DateTime.Now;

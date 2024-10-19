@@ -11,6 +11,5 @@ public class CommunityHomeRequestDto
     [Required] public double BailAmount { get; init; }
     [Required] public double Area { get; init; }
     public double? CutleryPrice { get; init; }
-    [Required] public bool IsFree { get; init; }
     [Required] public int Capacity { get; init; }
 }

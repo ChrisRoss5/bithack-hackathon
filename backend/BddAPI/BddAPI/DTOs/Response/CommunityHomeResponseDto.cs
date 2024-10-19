@@ -11,6 +11,5 @@ public class CommunityHomeResponseDto
     public double Area { get; init; }
     public double CutleryPrice { get; init; }
     public int Capacity { get; init; }
-    public bool IsFree { get; init; }
     public DateTime CreatedAt { get; init; }
 }

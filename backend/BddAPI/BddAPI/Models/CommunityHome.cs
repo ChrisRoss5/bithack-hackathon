@@ -16,6 +16,5 @@ public class CommunityHome
     [Required] public double Area { get; init; }
     public double? CutleryPrice { get; init; }
     [Required] public int Capacity { get; init; }
-    [Required] public bool IsFree { get; set; }
     public DateTime CreatedAt { get; init; } = DateTime.Now;
 }
