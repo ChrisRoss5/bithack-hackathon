@@ -36,6 +36,20 @@ public class ContractsController(IContractService contractService) : ControllerB
         return Ok(contract);
     }
 
+    [HttpGet("get-by-user-id")]
+    public async Task<IActionResult> GetContractsByUserId(Guid userId)
+    {
+        var contracts = await contractService.GetContractsByUserId(userId);
+        return Ok(contracts);
+    }
+
+    [HttpGet("get-all")]
+    public async Task<IActionResult> GetAllContracts()
+    {
+        var contracts = await contractService.GetAllContracts();
+        return Ok(contracts);
+    }
+
     [HttpDelete("delete")]
     public async Task<IActionResult> DeleteContract(Guid contractId)
     {

@@ -14,6 +14,8 @@ public interface IContractRepository
     Task SaveChangesAsync();
     Task<List<CommunityHomeWithContracts>> GetContractsForSearch(DateTime from, DateTime to);
     Task<Contract?> GetContractById(Guid contractId);
+    Task<List<Contract>?> GetContractsByUserId(Guid userId);
+    Task<List<Contract>?> GetAllContracts();
     Task DeleteContract(Contract contract);
     Task<Contract> UpdateStatus(Guid contractId, ContractStatus status);
     Task<Contract> UpdateContract(Contract contract);
@@ -104,6 +106,23 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
             .Include(c => c.CommunityHome)
             .Include(c => c.CommunityHome)
             .FirstOrDefaultAsync(c => c.Id == contractId);
+    }
+
+    public async Task<List<Contract>?> GetContractsByUserId(Guid userId)
+    {
+        return await dbContext.Contracts
+            .Include(c => c.User)
+            .Include(c => c.CommunityHome)
+            .Where(c => c.UserId == userId)
+            .ToListAsync();
+    }
+
+    public async Task<List<Contract>?> GetAllContracts()
+    {
+        return await dbContext.Contracts
+            .Include(c => c.User)
+            .Include(c => c.CommunityHome)
+            .ToListAsync();
     }
 
     public async Task DeleteContract(Contract contract)

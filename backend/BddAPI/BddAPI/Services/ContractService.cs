@@ -14,6 +14,8 @@ public interface IContractService
     Task<ContractResponseDto> SetContractToPreparedStatus(Guid contractId);
     Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId);
     Task<ContractResponseDto> GetByContractId(Guid contractId);
+    Task<List<ContractResponseDto>> GetContractsByUserId(Guid userId);
+    Task<List<ContractResponseDto>> GetAllContracts();
     Task DeleteContract(Guid contractId);
     Task<ContractResponseDto> UpdateContract(Guid contractId, ContractRequestDto contractRequestDto);
 }
@@ -66,6 +68,30 @@ public class ContractService(IContractRepository contractRepository, IMapper map
         }
 
         return mapper.Map<ContractResponseDto>(retrievedContract);
+    }
+
+    public async Task<List<ContractResponseDto>> GetContractsByUserId(Guid userId)
+    {
+        var contracts = await contractRepository.GetContractsByUserId(userId);
+
+        if (contracts == null)
+        {
+            throw new NotFoundException($"No contracts found for user with ID {userId}");
+        }
+
+        return mapper.Map<List<ContractResponseDto>>(contracts);
+    }
+
+    public async Task<List<ContractResponseDto>> GetAllContracts()
+    {
+        var contracts = await contractRepository.GetAllContracts();
+
+        if (contracts == null)
+        {
+            throw new NotFoundException("No contracts found");
+        }
+
+        return mapper.Map<List<ContractResponseDto>>(contracts);
     }
 
     public async Task DeleteContract(Guid contractId)
