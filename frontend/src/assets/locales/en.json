@@ -21,6 +21,10 @@
       "showAll": "Show All",
       "search": "Search"
     },
-    "reserve": "Reserve"
+    "reserve": "Reserve",
+    "cancel": "Odustani",
+    "hour": "Hour",
+    "free": "Free",
+    "partlyFree": "Partly free"
   }
 }
