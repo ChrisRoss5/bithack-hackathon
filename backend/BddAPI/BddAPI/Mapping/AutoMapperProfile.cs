@@ -12,6 +12,9 @@ public class AutoMapperProfile : Profile
         CreateMap<User, UserRequestDto>();
         CreateMap<UserRequestDto, User>();
 
+        CreateMap<User, UserResponseDto>();
+        CreateMap<UserResponseDto, User>();
+
         CreateMap<CommunityHome, CommunityHomeRequestDto>();
         CreateMap<CommunityHomeRequestDto, CommunityHome>();
 
@@ -26,5 +29,11 @@ public class AutoMapperProfile : Profile
 
         CreateMap<ContractRangeRequestDto, ContractRange>();
         CreateMap<ContractRange, ContractRangeRequestDto>();
+
+        CreateMap<Record, RecordRequestDto>();
+        CreateMap<RecordRequestDto, Record>();
+
+        CreateMap<Record, RecordResponseDto>();
+        CreateMap<RecordResponseDto, Record>();
     }
 }

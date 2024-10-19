@@ -1,5 +1,7 @@
 using BddAPI.Data;
 using BddAPI.DTOs.Response;
+using BddAPI.Enum;
+using BddAPI.Exceptions;
 using BddAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +13,10 @@ public interface IContractRepository
     Task AssignContractDateRanges(List<ContractRange> contractRanges, Guid contractId);
     Task SaveChangesAsync();
     Task<List<CommunityHomeWithContracts>> GetContractsForSearch(DateTime from, DateTime to);
+    Task<Contract?> GetContractById(Guid contractId);
+    Task DeleteContract(Contract contract);
+    Task<Contract> UpdateStatus(Guid contractId, ContractStatus status);
+    Task<Contract> UpdateContract(Contract contract);
 }
 
 public class ContractRepository(BddDbContext dbContext) : IContractRepository
@@ -89,5 +95,42 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
         }
 
         return communityHomeWithContracts;
+    }
+
+    public Task<Contract?> GetContractById(Guid contractId)
+    {
+        return dbContext.Contracts
+            .Include(c => c.User)
+            .Include(c => c.CommunityHome)
+            .Include(c => c.CommunityHome)
+            .FirstOrDefaultAsync(c => c.Id == contractId);
+    }
+
+    public async Task DeleteContract(Contract contract)
+    {
+        dbContext.Contracts.Remove(contract);
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task<Contract> UpdateStatus(Guid contractId, ContractStatus status)
+    {
+        var contract = await dbContext.Contracts.FirstOrDefaultAsync(c => c.Id == contractId);
+
+        if (contract == null)
+        {
+            throw new NotFoundException($"Contract with id {contractId} not found");
+        }
+
+        contract.Status = status;
+        await dbContext.SaveChangesAsync();
+
+        return contract;
+    }
+
+    public async Task<Contract> UpdateContract(Contract contract)
+    {
+        dbContext.Contracts.Update(contract);
+        await dbContext.SaveChangesAsync();
+        return contract;
     }
 }

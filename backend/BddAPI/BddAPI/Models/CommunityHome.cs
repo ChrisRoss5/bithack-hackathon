@@ -5,7 +5,7 @@ namespace BddAPI.Models;
 public class CommunityHome
 {
     [Key] public Guid Id { get; init; }
-
+    public string? PictureUrl { get; init; }
     [Required] [MaxLength(50)] public string Name { get; init; }
     [Required] public double RentPrice { get; set; }
     [Required] [MaxLength(50)] public string Address { get; init; }
@@ -16,6 +16,6 @@ public class CommunityHome
     [Required] public double Area { get; init; }
     public double? CutleryPrice { get; init; }
     [Required] public int Capacity { get; init; }
-
+    [Required] public bool IsFree { get; set; }
     public DateTime CreatedAt { get; init; } = DateTime.Now;
 }

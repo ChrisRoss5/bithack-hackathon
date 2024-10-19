@@ -13,7 +13,9 @@ public interface IUserRepository
     Task<User?> GetUserByFirebaseUid(string username);
     Task AssignRoleToUser(UserRole role);
     Task<IEnumerable<Role>> GetUserRoles(Guid userId);
+    Task<User> UpdateUser(User user);
     Task<Role> GetDefaultRole();
+    Task DeleteUser(User user);
     Task SaveChangesAsync();
 }
 
@@ -56,10 +58,23 @@ public class UserRepository(BddDbContext dbContext) : IUserRepository
             .ToListAsync();
     }
 
+    public async Task<User> UpdateUser(User user)
+    {
+        dbContext.Users.Update(user);
+        await SaveChangesAsync();
+        return user;
+    }
+
     public async Task<Role> GetDefaultRole()
     {
         return await dbContext.Roles.FirstOrDefaultAsync(r => r.Name == "User") ??
                throw new UserException("Default role not found");
+    }
+
+    public async Task DeleteUser(User user)
+    {
+        dbContext.Users.Remove(user);
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task SaveChangesAsync()

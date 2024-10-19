@@ -105,6 +105,8 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IContractRepository, ContractRepository>();
 builder.Services.AddScoped<IContractService, ContractService>();
 builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
+builder.Services.AddScoped<IRecordRepository, RecordRepository>();
+builder.Services.AddScoped<IRecordService, RecordService>();
 
 var app = builder.Build();
 

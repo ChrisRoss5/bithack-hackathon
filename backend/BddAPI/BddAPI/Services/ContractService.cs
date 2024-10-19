@@ -1,6 +1,8 @@
 using AutoMapper;
 using BddAPI.DTOs.Request;
 using BddAPI.DTOs.Response;
+using BddAPI.Enum;
+using BddAPI.Exceptions;
 using BddAPI.Models;
 using BddAPI.Repositories;
 
@@ -9,6 +11,11 @@ namespace BddAPI.Services;
 public interface IContractService
 {
     Task<ContractResponseDto> CreateContract(ContractRangeRequestDto contractRangeRequestDtos);
+    Task<ContractResponseDto> SetContractToPreparedStatus(Guid contractId);
+    Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId);
+    Task<ContractResponseDto> GetByContractId(Guid contractId);
+    Task DeleteContract(Guid contractId);
+    Task<ContractResponseDto> UpdateContract(Guid contractId, ContractRequestDto contractRequestDto);
 }
 
 public class ContractService(IContractRepository contractRepository, IMapper mapper) : IContractService
@@ -33,6 +40,58 @@ public class ContractService(IContractRepository contractRepository, IMapper map
         await contractRepository.SaveChangesAsync();
 
         // Return the response DTO
+        return mapper.Map<ContractResponseDto>(contract);
+    }
+
+    public async Task<ContractResponseDto> SetContractToPreparedStatus(Guid contractId)
+    {
+        var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.Prepared);
+        return mapper.Map<ContractResponseDto>(updatedContract);
+    }
+
+    public async Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId)
+    {
+        var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.MayorSigned);
+
+        return mapper.Map<ContractResponseDto>(updatedContract);
+    }
+
+    public async Task<ContractResponseDto> GetByContractId(Guid contractId)
+    {
+        var retrievedContract = await contractRepository.GetContractById(contractId);
+
+        if (retrievedContract == null)
+        {
+            throw new NotFoundException($"Contract with ID {contractId} not found");
+        }
+
+        return mapper.Map<ContractResponseDto>(retrievedContract);
+    }
+
+    public async Task DeleteContract(Guid contractId)
+    {
+        var existingContract = await contractRepository.GetContractById(contractId);
+
+        if (existingContract == null)
+        {
+            throw new NotFoundException($"Contract with ID {contractId} not found");
+        }
+
+        await contractRepository.DeleteContract(existingContract);
+    }
+
+    public async Task<ContractResponseDto> UpdateContract(Guid contractId, ContractRequestDto contractRequestDto)
+    {
+        var contract = await contractRepository.GetContractById(contractId);
+
+        if (contract == null)
+        {
+            throw new NotFoundException($"Contract with ID {contractId} not found");
+        }
+
+        mapper.Map(contractRequestDto, contract);
+        await contractRepository.UpdateContract(contract);
+
         return mapper.Map<ContractResponseDto>(contract);
     }
 }
