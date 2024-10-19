@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using BddAPI.Enum;
 using BddAPI.Models;
 
@@ -13,7 +12,8 @@ public class ContractResponseDto
 
     public CommunityHome CommunityHome { get; set; }
     public Guid CommunityHomeId { get; set; }
-    [Required] public bool IsFree { get; set; }
+    public bool IsFree { get; set; }
+    public string LeasePurpose { get; set; }
 
     public ContractStatus Status { get; set; } = ContractStatus.Prepared;
 

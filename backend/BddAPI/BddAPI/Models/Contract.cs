@@ -13,6 +13,7 @@ public class Contract
     public Guid CommunityHomeId { get; set; }
 
     public bool IsFree { get; set; } = false;
+    public string LeasePurpose { get; set; }
     public ContractStatus Status { get; set; } = ContractStatus.Prepared;
 
     public DateTime DateOfIssue { get; set; } = DateTime.Now;
