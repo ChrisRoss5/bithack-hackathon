@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@vueform/slider": "^2.1.10",
+    "@vueuse/core": "^11.1.0",
     "axios": "^1.7.7",
     "firebase": "^10.14.1",
     "firebaseui": "^6.1.0",

@@ -21,6 +21,10 @@
       "showAll": "Prikaži sve",
       "search": "Pretraži"
     },
-    "reserve": "Rezerviraj"
+    "reserve": "Rezerviraj",
+    "cancel": "Odustani",
+    "hour": "Sat",
+    "free": "Slobodno",
+    "partlyFree": "Djelomično slobodno"
   }
 }

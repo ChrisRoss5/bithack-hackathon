@@ -32,14 +32,14 @@ const isOpen = ref(false);
         class="flex min-h-full w-80 flex-col items-center gap-3 bg-base-200 p-4 text-base-content"
       >
         <Title />
-        <div class="separator bg-base-100"></div>
+        <div class="dsy-divider"></div>
         <Login :in-drawer="true" />
-        <div class="separator bg-base-100"></div>
+        <div class="dsy-divider"></div>
         <div class="flex items-center flex-wrap">
           <Theme />
           <Language />
         </div>
-        <div class="separator bg-base-100"></div>
+        <div class="dsy-divider"></div>
         <Links />
       </div>
     </div>
