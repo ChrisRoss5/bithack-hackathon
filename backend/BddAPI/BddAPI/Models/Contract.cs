@@ -14,6 +14,7 @@ public class Contract
 
     public bool IsFree { get; set; } = false;
     public string LeasePurpose { get; set; }
+    public bool UsingCutlery { get; set; } = false;
     public ContractStatus Status { get; set; } = ContractStatus.Prepared;
 
     public DateTime DateOfIssue { get; set; } = DateTime.Now;
