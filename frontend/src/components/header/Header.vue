@@ -54,7 +54,7 @@ onMounted(() => {
 </template>
 
 <style>
-.router-link-active:not(#title) {
+.router-link-exact-active:not(#title) {
   color: oklch(var(--p));
   text-shadow: 0 0 1px currentColor;
 }

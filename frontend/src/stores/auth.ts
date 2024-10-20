@@ -22,6 +22,8 @@ export const URLS = {
   GET_USER_INFO: `${REST_API_URL}/users/get-by-id`,
   UPDATE_USER_INFO: `${REST_API_URL}/users/update`,
   CREATE_CONTRACT: `${REST_API_URL}/contracts/create`,
+  GET_CONTRACTS: `${REST_API_URL}/contracts/`,
+  GET_CONTRACTS_BY_USER: `${REST_API_URL}/contracts/get-by-user-id`,
 };
 
 const AXIOS_CLIENT_OPTIONS: CreateAxiosDefaults = {
@@ -59,7 +61,6 @@ export const useAuthStore = defineStore("auth", () => {
       email: formattedData.email!,
       username: formattedData.name!,
       role: formattedData.role!,
-      createdAt: new Date(), //  todo
     };
   };
 

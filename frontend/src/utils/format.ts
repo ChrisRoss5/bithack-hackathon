@@ -7,7 +7,7 @@ export function formatDate(date?: Date) {
 
 function isIsoDateString(value: string): boolean {
   // Simple regex to check if the string matches the ISO date format
-  const isoDateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+$/;
+  const isoDateRegex = /^\d{4}-\d{2}-\d{2}/;
   return isoDateRegex.test(value);
 }
 

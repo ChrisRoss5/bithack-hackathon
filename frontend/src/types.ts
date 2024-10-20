@@ -21,9 +21,12 @@ declare global {
   }
   interface Contract {
     id: string;
-    isFree: boolean;
     user: User;
-    home: Home;
+    communityHome: Home;
+    isFree: boolean;
+    leasePurpose: string;
+    usingCutlery: boolean;
+    vat: number;
     status: ContractStatus;
     dateOfIssue: Date;
     contractRanges: ContractRange[];
@@ -35,12 +38,12 @@ declare global {
       leasePurpose: string;
       isfree: boolean;
       usingCutlery: boolean;
-    },
+    };
     contractRanges: ContractRange[];
   }
-  interface ContractStatus {
-    Prepared: "1";
-    MayorSigned: "2";
+  enum ContractStatus {
+    Prepared = "1",
+    MayorSigned = "2",
   }
   interface ContractRange {
     id?: string;
@@ -72,11 +75,13 @@ declare global {
     iban?: string;
     phoneNumber?: string;
     createdAt?: Date;
-    role: Role;
-  }
-  enum Role {
-    Superuser = "Superuser",
-    Admin = "Admin",
-    User = "User",
+    role: string;
   }
 }
+
+export const ROLE = Object.freeze({
+  USER: "User",
+  JANITOR: "Janitor",
+  CITY_OFFICIAL: "CityOfficial",
+  MAYOR: "Mayor",
+});

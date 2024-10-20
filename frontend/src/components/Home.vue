@@ -3,7 +3,7 @@ import { useHomesStore } from "@/stores/homes";
 import { formatDate } from "@/utils/format";
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import Reservation from "./search/Reservation.vue";
+import Reservation from "./Reservation.vue";
 import Results from "./search/Results.vue";
 import Search from "./search/Search.vue";
 
