@@ -20,6 +20,7 @@ const handleSearch = () => {
     ? new Date(searchStore.dateFrom)
     : undefined;
   const _to = searchStore.dateTo ? new Date(searchStore.dateTo) : undefined;
+  
   emits("change", _from, _to);
 };
 

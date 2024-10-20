@@ -34,8 +34,8 @@ onMounted(() => {
 });
 
 const handleSearch = async (from?: Date, to?: Date) => {
+  selectedHome.value = null;
   console.log("SEARCHING");
-
   homes.value = await homesStore.getHomes(
     formatDate(from),
     formatDate(to),
