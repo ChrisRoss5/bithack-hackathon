@@ -50,13 +50,6 @@ const { t } = useI18n();
           <span class="material-symbols-outlined pr-1"> euro </span>
           {{ home.leaseAmount }}€ / {{ t("home.hour") }}
         </div>
-        <div
-          class="dsy-badge dsy-badge-outline h-auto px-2 py-1"
-          v-if="home.cutleryPrice"
-        >
-          <span class="material-symbols-outlined pr-1"> restaurant </span>
-          {{ home.cutleryPrice }}
-        </div>
       </div>
       <div class="dsy-divider"></div>
       <div class="dsy-btn dsy-btn-outline" @click="emits('reserve', home)">

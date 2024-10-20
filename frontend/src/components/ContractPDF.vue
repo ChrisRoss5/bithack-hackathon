@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div id="print">
+  <div id="print" class="text-black">
     <div class="page">
       Temeljem članka 2. i 8. Odluke o upravljanju, povremenom zakupu,
       korištenju i davanju na uporabu društvenih domova na području mjesnih

@@ -63,6 +63,8 @@ export const useAuthStore = defineStore("auth", () => {
       username: formattedData.name!,
       role: formattedData.role!,
     };
+    console.log("User info", userInfo.value);
+
   };
 
   if (isLoggedIn.value) initUser(accessToken.value!);
@@ -96,7 +98,7 @@ export const useAuthStore = defineStore("auth", () => {
       params: { userId: userInfo.value!.id },
     });
     if (response.status === 200) {
-      userInfo.value = response.data;
+      userInfo.value = { ...userInfo.value, ...response.data};
     }
   };
 

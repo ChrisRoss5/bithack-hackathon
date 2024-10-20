@@ -7,6 +7,7 @@ import { useSearchStore } from "@/stores/search";
 import Slider from "@vueform/slider";
 import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRouter } from "vue-router";
 import ContractPDF from "./ContractPDF.vue";
 
 const props = defineProps<{ home: Home; contract?: Contract }>();
@@ -16,6 +17,7 @@ const { t, locale } = useI18n();
 const searchStore = useSearchStore();
 const authStore = useAuthStore();
 const contractsStore = useContractsStore();
+const router = useRouter();
 
 const reservationDiv = ref<HTMLElement | null>(null);
 
@@ -133,16 +135,15 @@ const totalPrice = computed(() => {
 });
 
 const submitReservation = async () => {
-  console.log("SUBMITTING RESERVATION");
-  console.log(contractForm.value);
   contractsStore.submitContract(contractForm.value);
+  router.push("/ugovori");
 };
 const handleSliderUpdate = (e: [number, number]) => {
   if (applySliderToAll.value)
     days.value.forEach((day) => (day.slider.value = e));
 };
 const print = () => {
-  window.print()
+  window.print();
 };
 const confirmPayment = async () => {
   console.log("CONFIRMING PAYMENT");
@@ -239,8 +240,8 @@ const confirmPayment = async () => {
             />
           </label>
           <div
-            class="mr-6 grid cursor-not-allowed gap-10 lg:grid-cols-[auto_1fr]"
-            :class="{ 'mt-12': !!contract }"
+            class="mr-6 grid gap-10 lg:grid-cols-[auto_1fr]"
+            :class="{ 'mt-12 cursor-not-allowed': !!contract }"
           >
             <template v-for="day in days" :key="+day.date">
               <div class="-translate-y-1 text-center capitalize lg:text-right">
@@ -340,16 +341,30 @@ const confirmPayment = async () => {
       <template v-if="!!contract">
         <div class="dsy-divider"></div>
         <div v-if="contract.status == 2">
-          <ContractPDF :contract="contract" />
-          <div class="flex flex-wrap">
-            <div
-              class="dsy-btn dsy-btn-outline dsy-btn-primary flex-1"
-              @click="print"
-            >
-              Print
+          <div class="dsy-collapse dsy-collapse-arrow bg-base-200">
+            <input type="checkbox" @change="() => loadDays()" />
+            <div class="dsy-collapse-title text-xl font-medium">
+              <span class="material-symbols-outlined align-middle">
+                picture_as_pdf
+              </span>
+              PDF dokumenti
             </div>
-            <div class="dsy-btn dsy-btn-primary flex-1" @click="confirmPayment">
-              Potvrdi plaćanje
+            <div class="dsy-collapse-content">
+              <ContractPDF :contract="contract" />
+              <div class="flex flex-wrap">
+                <div
+                  class="dsy-btn dsy-btn-outline dsy-btn-primary flex-1"
+                  @click="print"
+                >
+                  Print
+                </div>
+                <div
+                  class="dsy-btn dsy-btn-primary flex-1"
+                  @click="confirmPayment"
+                >
+                  Potvrdi plaćanje
+                </div>
+              </div>
             </div>
           </div>
         </div>

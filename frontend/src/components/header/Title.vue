@@ -6,7 +6,7 @@ const { t } = useI18n();
 
 <template>
   <RouterLink to="/" class="flex items-center gap-3 font-bold" id="title">
-    <img src="/favicon.png" alt="" class="h-8" />
+    <img src="/favicon.png" alt="" class="h-14 drop-shadow-lg" />
     <div>{{ t("appName") }}</div>
   </RouterLink>
 </template>
