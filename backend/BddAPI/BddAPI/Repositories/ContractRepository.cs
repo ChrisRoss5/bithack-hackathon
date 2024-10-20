@@ -18,7 +18,7 @@ public interface IContractRepository
     Task<List<Contract>?> GetAllContracts();
     Task<List<ContractRange>?> GetContractRangesByContractId(Guid contractId);
     Task DeleteContract(Contract contract);
-    Task<Contract> UpdateStatus(Guid contractId, ContractStatus status);
+    Task<Contract> UpdateStatus(Guid contractId, ContractStatus statusType);
     Task<Contract> UpdateContract(Contract contract);
 }
 
@@ -139,7 +139,7 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
         await dbContext.SaveChangesAsync();
     }
 
-    public async Task<Contract> UpdateStatus(Guid contractId, ContractStatus status)
+    public async Task<Contract> UpdateStatus(Guid contractId, ContractStatus statusType)
     {
         var contract = await dbContext.Contracts.FirstOrDefaultAsync(c => c.Id == contractId);
 
@@ -148,7 +148,7 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
             throw new NotFoundException($"Contract with id {contractId} not found");
         }
 
-        contract.Status = status;
+        contract.Status = statusType;
         await dbContext.SaveChangesAsync();
 
         return contract;

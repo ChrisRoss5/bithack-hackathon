@@ -11,9 +11,7 @@ namespace BddAPI.Services;
 public interface IContractService
 {
     Task<ContractResponseDto> CreateContract(ContractRangeRequestDto contractRangeRequestDtos);
-    Task<ContractResponseDto> SetContractToPreparedStatus(Guid contractId);
-    Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId);
-    Task<ContractResponseDto> SetContractToUserSignedStatus(Guid contractId);
+    Task<ContractResponseDto> UpdateStatus(Guid contractId, ContractStatus statusType);
     Task<ContractResponseDto> GetByContractId(Guid contractId);
     Task<List<ContractResponseDto>> GetContractsByUserId(Guid userId);
     Task<List<ContractRangeResponseDto>> GetContractRangesByContractId(Guid contractId);
@@ -47,24 +45,10 @@ public class ContractService(IContractRepository contractRepository, IMapper map
         return mapper.Map<ContractResponseDto>(contract);
     }
 
-    public async Task<ContractResponseDto> SetContractToPreparedStatus(Guid contractId)
+    public async Task<ContractResponseDto> UpdateStatus(Guid contractId, ContractStatus statusType)
     {
-        var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.Prepared);
-        return mapper.Map<ContractResponseDto>(updatedContract);
-    }
-
-    public async Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId)
-    {
-        var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.MayorSigned);
-
-        return mapper.Map<ContractResponseDto>(updatedContract);
-    }
-
-    public async Task<ContractResponseDto> SetContractToUserSignedStatus(Guid contractId)
-    {
-        var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.UserSigned);
-
-        return mapper.Map<ContractResponseDto>(updatedContract);
+        var contract = await contractRepository.UpdateStatus(contractId, statusType);
+        return mapper.Map<ContractResponseDto>(contract);
     }
 
     public async Task<ContractResponseDto> GetByContractId(Guid contractId)

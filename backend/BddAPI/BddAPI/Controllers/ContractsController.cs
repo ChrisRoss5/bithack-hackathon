@@ -1,4 +1,5 @@
 using BddAPI.DTOs.Request;
+using BddAPI.Enum;
 using BddAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,24 +16,10 @@ public class ContractsController(IContractService contractService) : ControllerB
         return Ok(contract);
     }
 
-    [HttpPut("set-to-mayor-signed")]
-    public async Task<IActionResult> SetContractToMayorSigned(Guid contractId)
+    [HttpPut("update-status")]
+    public async Task<IActionResult> UpdateStaus(Guid contractId, ContractStatus statsType)
     {
-        var contract = await contractService.SetContractToMayorSignedStatus(contractId);
-        return Ok(contract);
-    }
-
-    [HttpPut("set-to-prepared")]
-    public async Task<IActionResult> SetContractToPrepared(Guid contractId)
-    {
-        var contract = await contractService.SetContractToPreparedStatus(contractId);
-        return Ok(contract);
-    }
-
-    [HttpPut("set-to-user-signed")]
-    public async Task<IActionResult> SetContractToUserSigned(Guid contractId)
-    {
-        var contract = await contractService.SetContractToUserSignedStatus(contractId);
+        var contract = await contractService.UpdateStatus(contractId, statsType);
         return Ok(contract);
     }
 

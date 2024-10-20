@@ -2,7 +2,8 @@ namespace BddAPI.Enum;
 
 public enum ContractStatus
 {
-    Prepared = 1,
-    MayorSigned = 2,
-    UserSigned = 3,
+    New = 1,
+    Prepared = 2,
+    MayorSigned = 3,
+    UserSigned = 4
 }
