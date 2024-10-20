@@ -1,8 +1,7 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
-import { URLS, useAuthStore } from "./auth";
-import { useToast } from "vue-toastification";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
+import { URLS, useAuthStore } from "./auth";
 
 export const useContractsStore = defineStore("contracts", () => {
   const authStore = useAuthStore();
@@ -18,7 +17,16 @@ export const useContractsStore = defineStore("contracts", () => {
     else toast.error(t("serverError"));
   };
 
+  const getContracts = async () => {
+    const response = await authStore.client.get(URLS.GET_CONTRACTS_BY_USER, {
+      params: { userId: authStore.userInfo?.id },
+    });
+    if (response.status === 200) return response.data;
+    else toast.error(t("serverError"));
+  };
+
   return {
     submitContract,
+    getContracts,
   };
 });

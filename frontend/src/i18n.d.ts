@@ -1,8 +1,4 @@
-import {
-  DefineLocaleMessage,
-  DefineDateTimeFormat,
-  DefineNumberFormat,
-} from "vue-i18n";
+import "vue-i18n";
 
 declare module "vue-i18n" {
   export interface DefineLocaleMessage {
@@ -16,7 +12,7 @@ declare module "vue-i18n" {
       logout: string;
       lightMode: string;
       darkMode: string;
-      myContracts: string;
+      contracts: string;
     };
     home: {
       title: string;
@@ -28,13 +24,13 @@ declare module "vue-i18n" {
         toDescription: string;
         showAll: string;
         search: string;
-      },
+      };
       reserve: string;
       cancel: string;
       hour: string;
       free: string;
       partlyFree: string;
-    },
+    };
     account: {
       completeProfile: string;
       username: string;
@@ -46,11 +42,18 @@ declare module "vue-i18n" {
       oib: string;
       postalCode: string;
       phoneNumber: string;
-    },
+    };
+    contract: {
+      status: {
+        "1": string;
+        "2": string;
+      }
+    };  // todo
     save: string;
     operationSuccess: string;
     serverError: string;
     freeCondition: string;
+    dateCreated: string;
   }
 
   export interface DefineDateTimeFormat {

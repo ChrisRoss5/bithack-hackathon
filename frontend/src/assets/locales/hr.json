@@ -9,7 +9,7 @@
     "logout": "Odjava",
     "lightMode": "Svijetli prikaz",
     "darkMode": "Tamni prikaz",
-    "myContracts": "Moji ugovori"
+    "contracts": "Ugovori"
   },
   "home": {
     "title": "Rezerviraj društveni dom",
@@ -29,7 +29,7 @@
     "partlyFree": "Djelomično slobodno"
   },
   "account": {
-  "completeProfile": "Molimo, ispunite profil kako biste mogli rezervirati domove.",
+    "completeProfile": "Molimo, ispunite profil kako biste mogli rezervirati domove.",
     "username": "Korisničko ime",
     "firstName": "Ime",
     "lastName": "Prezime",
@@ -40,8 +40,15 @@
     "postalCode": "Poštanski broj",
     "phoneNumber": "Broj telefona"
   },
+  "contract": {
+    "status": {
+      "1": "Pripremljen",
+      "2": "Potpisan od gradonačelnika"
+    }
+  },
   "save": "Spremi",
   "operationSuccess": "Uspješno izvšeno!",
   "serverError": "Greška na serveru!",
-  "freeCondition": "Besplatni najam za događaje (karmine, dobrovoljno vatrogasno društvo)"
+  "freeCondition": "Besplatni najam za događaje (karmine, dobrovoljno vatrogasno društvo)",
+  "dateCreated": "Datum kreiranja"
 }

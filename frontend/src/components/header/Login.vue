@@ -25,15 +25,17 @@ const handleLogout = () => {
     class="dsy-dropdown dsy-dropdown-end dsy-dropdown-hover"
   >
     <button class="dsy-btn m-1" :class="{ 'bg-base-100': inDrawer }">
-      {{ t("header.greeting") }}, {{ authStore.userInfo?.username }}
+      {{ t("header.greeting") }}, {{ authStore.userInfo?.username }} ({{
+        authStore.userInfo?.role
+      }})
     </button>
     <ul
       tabindex="0"
       class="dsy-menu dsy-dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 text-base-content shadow"
     >
       <li @click="handleClick">
-        <RouterLink to="/korisnik">
-          {{ t("header.myContracts") }}
+        <RouterLink to="/ugovori">
+          {{ t("header.contracts") }}
           <span class="material-symbols-outlined ml-auto"> list_alt </span>
         </RouterLink>
       </li>

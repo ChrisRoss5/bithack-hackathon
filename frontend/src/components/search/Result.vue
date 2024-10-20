@@ -37,7 +37,9 @@ const { t } = useI18n();
       </div>
       <div class="dsy-card-actions mt-3 justify-end">
         <div class="dsy-badge dsy-badge-outline h-auto px-2 py-1">
-          <span class="material-symbols-outlined pr-1"> responsive_layout </span>
+          <span class="material-symbols-outlined pr-1">
+            responsive_layout
+          </span>
           {{ home.area }} m<sup>2</sup>
         </div>
         <div class="dsy-badge dsy-badge-outline h-auto px-2 py-1">

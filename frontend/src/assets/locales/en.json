@@ -9,7 +9,7 @@
     "logout": "Sing out",
     "lightMode": "Light mode",
     "darkMode": "Dark mode",
-    "myContracts": "My contracts"
+    "contracts": "Contracts"
   },
   "home": {
     "title": "Book a community home",
@@ -40,8 +40,15 @@
     "oib": "OIB",
     "phoneNumber": "Phone number"
   },
+  "contract": {
+    "status": {
+      "1": "Prepared",
+      "2": "Signed by the mayor"
+    }
+  },
   "save": "Save",
   "operationSuccess": "Operation successful!",
   "serverError": "Server error!",
-  "freeCondition": "Free rental for events (karmine, voluntary fire brigade)"
+  "freeCondition": "Free rental for events (karmine, voluntary fire brigade)",
+  "dateCreated": "Date created"
 }
