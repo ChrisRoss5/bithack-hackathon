@@ -13,6 +13,7 @@ public interface IContractService
     Task<ContractResponseDto> CreateContract(ContractRangeRequestDto contractRangeRequestDtos);
     Task<ContractResponseDto> SetContractToPreparedStatus(Guid contractId);
     Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId);
+    Task<ContractResponseDto> SetContractToUserSignedStatus(Guid contractId);
     Task<ContractResponseDto> GetByContractId(Guid contractId);
     Task<List<ContractResponseDto>> GetContractsByUserId(Guid userId);
     Task<List<ContractResponseDto>> GetAllContracts();
@@ -54,6 +55,13 @@ public class ContractService(IContractRepository contractRepository, IMapper map
     public async Task<ContractResponseDto> SetContractToMayorSignedStatus(Guid contractId)
     {
         var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.MayorSigned);
+
+        return mapper.Map<ContractResponseDto>(updatedContract);
+    }
+
+    public async Task<ContractResponseDto> SetContractToUserSignedStatus(Guid contractId)
+    {
+        var updatedContract = await contractRepository.UpdateStatus(contractId, ContractStatus.UserSigned);
 
         return mapper.Map<ContractResponseDto>(updatedContract);
     }

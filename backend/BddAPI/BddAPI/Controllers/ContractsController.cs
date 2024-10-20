@@ -29,6 +29,13 @@ public class ContractsController(IContractService contractService) : ControllerB
         return Ok(contract);
     }
 
+    [HttpPut("set-to-user-signed")]
+    public async Task<IActionResult> SetContractToUserSigned(Guid contractId)
+    {
+        var contract = await contractService.SetContractToUserSignedStatus(contractId);
+        return Ok(contract);
+    }
+
     [HttpGet("get-by-id")]
     public async Task<IActionResult> GetContractById(Guid contractId)
     {

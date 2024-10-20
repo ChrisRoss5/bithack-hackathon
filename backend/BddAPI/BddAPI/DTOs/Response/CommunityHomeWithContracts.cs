@@ -1,8 +1,4 @@
-using Microsoft.Identity.Client;
-using System.ComponentModel.DataAnnotations;
-using BddAPI.DTOs.Response;
-
-namespace BddAPI.Models;
+namespace BddAPI.DTOs.Response;
 
 public class CommunityHomeWithContracts
 {
