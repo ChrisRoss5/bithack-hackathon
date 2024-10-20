@@ -57,6 +57,13 @@ public class ContractsController(IContractService contractService) : ControllerB
         return Ok(contracts);
     }
 
+    [HttpGet("get-contract-ranges")]
+    public async Task<IActionResult> GetContractRangesByContractId(Guid contractId)
+    {
+        var contractRanges = await contractService.GetContractRangesByContractId(contractId);
+        return Ok(contractRanges);
+    }
+
     [HttpDelete("delete")]
     public async Task<IActionResult> DeleteContract(Guid contractId)
     {

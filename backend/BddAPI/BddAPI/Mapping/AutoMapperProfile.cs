@@ -35,5 +35,8 @@ public class AutoMapperProfile : Profile
 
         CreateMap<Record, RecordResponseDto>();
         CreateMap<RecordResponseDto, Record>();
+
+        CreateMap<ContractRange, ContractRangeResponseDto>();
+        CreateMap<ContractRangeResponseDto, ContractRange>();
     }
 }

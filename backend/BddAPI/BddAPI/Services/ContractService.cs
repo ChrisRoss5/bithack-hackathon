@@ -16,6 +16,7 @@ public interface IContractService
     Task<ContractResponseDto> SetContractToUserSignedStatus(Guid contractId);
     Task<ContractResponseDto> GetByContractId(Guid contractId);
     Task<List<ContractResponseDto>> GetContractsByUserId(Guid userId);
+    Task<List<ContractRangeResponseDto>> GetContractRangesByContractId(Guid contractId);
     Task<List<ContractResponseDto>> GetAllContracts();
     Task DeleteContract(Guid contractId);
     Task<ContractResponseDto> UpdateContract(Guid contractId, ContractRequestDto contractRequestDto);
@@ -88,6 +89,13 @@ public class ContractService(IContractRepository contractRepository, IMapper map
         }
 
         return mapper.Map<List<ContractResponseDto>>(contracts);
+    }
+
+    public async Task<List<ContractRangeResponseDto>> GetContractRangesByContractId(Guid contractId)
+    {
+        var contractRanges = await contractRepository.GetContractRangesByContractId(contractId);
+
+        return mapper.Map<List<ContractRangeResponseDto>>(contractRanges);
     }
 
     public async Task<List<ContractResponseDto>> GetAllContracts()

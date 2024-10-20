@@ -16,6 +16,7 @@ public interface IContractRepository
     Task<Contract?> GetContractById(Guid contractId);
     Task<List<Contract>?> GetContractsByUserId(Guid userId);
     Task<List<Contract>?> GetAllContracts();
+    Task<List<ContractRange>?> GetContractRangesByContractId(Guid contractId);
     Task DeleteContract(Contract contract);
     Task<Contract> UpdateStatus(Guid contractId, ContractStatus status);
     Task<Contract> UpdateContract(Contract contract);
@@ -122,6 +123,13 @@ public class ContractRepository(BddDbContext dbContext) : IContractRepository
         return await dbContext.Contracts
             .Include(c => c.User)
             .Include(c => c.CommunityHome)
+            .ToListAsync();
+    }
+
+    public async Task<List<ContractRange>?> GetContractRangesByContractId(Guid contractId)
+    {
+        return await dbContext.ContractRanges
+            .Where(cr => cr.ContractId == contractId)
             .ToListAsync();
     }
 
