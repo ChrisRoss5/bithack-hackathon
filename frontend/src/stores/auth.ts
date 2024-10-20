@@ -24,6 +24,7 @@ export const URLS = {
   CREATE_CONTRACT: `${REST_API_URL}/contracts/create`,
   GET_CONTRACTS: `${REST_API_URL}/contracts/`,
   GET_CONTRACTS_BY_USER: `${REST_API_URL}/contracts/get-by-user-id`,
+  GET_CONTRACT_RANGES: `${REST_API_URL}/contracts/get-contract-ranges`,
 };
 
 const AXIOS_CLIENT_OPTIONS: CreateAxiosDefaults = {

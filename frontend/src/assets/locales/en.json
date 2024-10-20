@@ -42,8 +42,10 @@
   },
   "contract": {
     "status": {
-      "1": "Prepared",
-      "2": "Signed by the mayor"
+      "1": "New",
+      "2": "Prepared",
+      "3": "Signed by the mayor",
+      "4": "Signed by the user"
     }
   },
   "save": "Save",

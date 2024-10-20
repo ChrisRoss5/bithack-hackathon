@@ -42,8 +42,10 @@
   },
   "contract": {
     "status": {
-      "1": "Pripremljen",
-      "2": "Potpisan od gradonačelnika"
+      "1": "Novi",
+      "2": "Pripremljen",
+      "3": "Potpisan od gradonačelnika",
+      "4": "Potpisan od korisnika"
     }
   },
   "save": "Spremi",

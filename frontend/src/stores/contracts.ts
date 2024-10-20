@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { useI18n } from "vue-i18n";
 import { useToast } from "vue-toastification";
 import { URLS, useAuthStore } from "./auth";
+import { parseDates } from "@/utils/format";
 
 export const useContractsStore = defineStore("contracts", () => {
   const authStore = useAuthStore();
@@ -25,8 +26,19 @@ export const useContractsStore = defineStore("contracts", () => {
     else toast.error(t("serverError"));
   };
 
+  const getContractRanges = async (contractId: string) => {
+    const response = await authStore.client.get(URLS.GET_CONTRACT_RANGES, {
+      params: { contractId },
+    });
+    if (response.status === 200) {
+      const parsedData = parseDates(response.data);
+      return parsedData as ContractRange[];
+    } else toast.error(t("serverError"));
+  };
+
   return {
     submitContract,
     getContracts,
+    getContractRanges,
   };
 });

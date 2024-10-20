@@ -42,8 +42,10 @@ declare global {
     contractRanges: ContractRange[];
   }
   enum ContractStatus {
-    Prepared = "1",
-    MayorSigned = "2",
+    NEW,
+    PREPARED,
+    SIGNED_BY_MAYOR,
+    SIGNED_BY_USER,
   }
   interface ContractRange {
     id?: string;

@@ -15,10 +15,7 @@ export const useHomesStore = defineStore("homes", () => {
         },
       },
     );
-
-    console.log(response.data);
     const parsedData = parseDates(response.data);
-    console.log(parsedData);
     return parsedData as Home[];
   };
 

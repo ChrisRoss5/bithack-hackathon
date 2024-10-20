@@ -12,6 +12,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  #print {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 200vh;
+    background: white;
+    z-index: 99999;
+  }
+  textarea {
+    resize: none !important;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 0;
+  }
+}
+
 @layer utilities {
   .flex-center {
     @apply flex items-center justify-center;
