@@ -12,14 +12,14 @@ namespace BddAPI.Models
         public Guid UserId { get; set; }
         public User User { get; set; }
 
-        [Required] public string ConditionBefore { get; set; }
+        public string ConditionBefore { get; set; }
 
-        [Required] public string ConditionAfter { get; set; }
+        public string ConditionAfter { get; set; }
 
-        [Required] public string DamageDone { get; set; }
+        public string DamageDone { get; set; }
 
-        [Required] public string Problems { get; set; }
+        public string Problems { get; set; }
 
-        [Required] public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }
