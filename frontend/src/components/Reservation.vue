@@ -135,7 +135,7 @@ const totalPrice = computed(() => {
 });
 
 const submitReservation = async () => {
-  contractsStore.submitContract(contractForm.value);
+  await contractsStore.submitContract(contractForm.value);
   router.push("/ugovori");
 };
 const handleSliderUpdate = (e: [number, number]) => {
@@ -340,7 +340,7 @@ const confirmPayment = async () => {
       </div>
       <template v-if="!!contract">
         <div class="dsy-divider"></div>
-        <div v-if="contract.status == 2">
+        <div v-if="contract.status == 1">
           <div class="dsy-collapse dsy-collapse-arrow bg-base-200">
             <input type="checkbox" @change="() => loadDays()" />
             <div class="dsy-collapse-title text-xl font-medium">

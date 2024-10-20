@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
-
+import Reservation from "./Reservation.vue";
 const { t } = useI18n();
 
 const props = defineProps<{
@@ -10,6 +10,7 @@ const props = defineProps<{
 
 <template>
   <div>
+
     <div class="dsy-collapse bg-base-200">
       <input type="radio" name="accordion" checked="true" />
       <div class="dsy-collapse-title p-0 text-xl font-medium">
