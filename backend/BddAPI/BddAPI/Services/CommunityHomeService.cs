@@ -94,7 +94,6 @@ public class CommunityHomeService(
 
         foreach (var home in communityHomesWithContracts)
         {
-            // Check if the home is available for every day in the search range
             var isHomeAvailable = true;
 
             for (var date = from.Date; date <= to.Date; date = date.AddDays(1))
@@ -113,51 +112,50 @@ public class CommunityHomeService(
         return availableHomes;
     }
 
+
     private static bool IsDayAvailable(CommunityHomeWithContracts home, DateTime date)
     {
-        // Get contracts that overlap with this day
-        var overlappingContracts = home.Contracts
-            .SelectMany(contract => contract.ContractRanges)
-            .Where(range => range.From.Date <= date && range.To.Date >= date)
-            .ToList();
+        // Initialize an array to represent each hour of the day (0 to 23)
+        var hours = new bool[24]; // false indicates available, true indicates booked
 
-        if (overlappingContracts.Count == 0)
+        // Mark booked hours based on overlapping contract ranges
+        foreach (var contract in home.Contracts)
         {
-            // No overlapping contracts; entire day is available
-            return true;
+            foreach (var range in contract.ContractRanges)
+            {
+                // Skip ranges that don't overlap with the current date
+                if (range.From.Date > date || range.To.Date < date)
+                    continue;
+
+                // Determine the start and end hours for the booking on this date
+                var startHour = (range.From.Date == date) ? range.From.Hour : 0;
+                var endHour = (range.To.Date == date) ? range.To.Hour : 24;
+
+                // Mark the hours as booked
+                for (int i = startHour; i < endHour; i++)
+                {
+                    hours[i] = true; // true indicates booked
+                }
+            }
         }
 
-        // Assume the day starts at 00:00 and ends at 23:59
-        var totalHoursAvailable = 24;
-
-        // Calculate used hours
-        foreach (var contractRange in overlappingContracts)
+        // Check for a continuous block of at least 8 available hours
+        var continuousAvailableHours = 0;
+        for (var i = 0; i < 24; i++)
         {
-            // If the contract overlaps with the start of the day, calculate the duration until the end of the day or end of the range
-            if (contractRange.From.Date == date)
+            if (!hours[i]) // Hour is available
             {
-                var startTime = contractRange.From.TimeOfDay;
-                var endTime = (contractRange.To.Date == date) ? contractRange.To.TimeOfDay : TimeSpan.FromHours(24);
-                totalHoursAvailable -= (int)(endTime - startTime).TotalHours;
+                continuousAvailableHours++;
+                if (continuousAvailableHours >= 8)
+                    return true; // Found a continuous block of at least 8 hours
             }
-            // If the contract overlaps with the entire day
-            else if (contractRange.To.Date == date)
-            {
-                totalHoursAvailable -= (int)contractRange.To.TimeOfDay.TotalHours;
-            }
-            // If the contract spans multiple days and covers the entire day
             else
             {
-                totalHoursAvailable -= 24;
-            }
-
-            // Check if there are still at least 8 hours available
-            if (totalHoursAvailable < 8)
-            {
-                return false;
+                continuousAvailableHours = 0; // Reset counter if hour is booked
             }
         }
 
-        return true;
+        // No continuous block of at least 8 hours found
+        return false;
     }
 }
