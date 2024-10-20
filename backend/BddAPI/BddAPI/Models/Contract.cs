@@ -16,7 +16,7 @@ public class Contract
     public string LeasePurpose { get; set; }
     public bool UsingCutlery { get; set; } = false;
     public double Vat { get; set; }
-    public ContractStatus Status { get; set; } = ContractStatus.Prepared;
+    public ContractStatus Status { get; set; } = ContractStatus.New;
 
     public DateTime DateOfIssue { get; set; } = DateTime.Now;
 }
