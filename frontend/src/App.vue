@@ -36,7 +36,7 @@ function throttle<T extends (...args: any[]) => void>(
 
 <template>
   <div
-    class="mx-auto mb-[75vh] max-w-screen-2xl bg-base-100/90 shadow-xl backdrop-blur-md 2xl:mt-6 2xl:rounded-3xl"
+    class="mx-auto mb-[75vh] overflow-clip max-w-screen-2xl bg-base-100/90 shadow-xl backdrop-blur-md 2xl:mt-6 2xl:rounded-3xl"
   >
     <Header />
     <RouterView class="px-8 pb-8 pt-24 lg:pt-32" />
