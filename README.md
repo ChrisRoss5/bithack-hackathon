@@ -10,10 +10,10 @@ NOTE: Published version is incomplete and with frontend only.
 > [HR] CILJ PROJEKTA:
 > Digitalizacija iznajmljivanja društvenih domova Grada Bjelovara ima za svrhu omogućiti građanima jednostavnu i brzu rezervaciju društvenih domova online. Umjesto dosadašnjih postupaka ispunjenih papirologijom i fizičkim odlascima u gradsku upravu, ovaj sustav treba modernizirati proces, omogućiti online pregled raspoloživosti, rezervaciju i upravljanje prostorima društvenih domova u vlasništvu Grada Bjelovara.
 
-**Landing page for hackathon: https://bithack.tpbj.hr/**
-DAY 1 photos: https://pixelfactory.pic-time.com/-bithackday1/gallery
-DAY 2 photos: https://pixelfactory.pic-time.com/-bithackday2/gallery
-DAY 3 photos: https://pixelfactory.pic-time.com/-bithackday3/gallery
+**Landing page for hackathon: https://bithack.tpbj.hr/**  
+DAY 1 photos: https://pixelfactory.pic-time.com/-bithackday1/gallery  
+DAY 2 photos: https://pixelfactory.pic-time.com/-bithackday2/gallery  
+DAY 3 photos: https://pixelfactory.pic-time.com/-bithackday3/gallery  
 
 ## Highlights
 ![Teams](/photos/B.IT_Hack_day_2-113.jpg "Teams")
